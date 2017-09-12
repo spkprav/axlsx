@@ -20,11 +20,16 @@ module Axlsx
     def initialize(title="", title_size="")
       self.cell = title if title.is_a?(Cell)
       self.text = title.to_s unless title.is_a?(Cell)
+      self.rotation = 0
       if title_size.to_s.empty?
         self.text_size = "1600"
       else
         self.text_size = title_size.to_s
       end
+    end
+
+    def rotation=(deg=0)
+      @rotation = deg.to_s
     end
 
     # @see text
@@ -75,7 +80,7 @@ module Axlsx
           str << '</c:strRef>'
         else
           str << '<c:rich>'
-            str << '<a:bodyPr/>'
+            str << '<a:bodyPr rot="' << @rotation.to_s << '"/>'
             str << '<a:lstStyle/>'
             str << '<a:p>'
               str << '<a:r>'

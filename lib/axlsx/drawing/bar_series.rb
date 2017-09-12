@@ -31,6 +31,7 @@ module Axlsx
     # @option options [String] colors an array of colors to use when rendering each data point
     # @param [Chart] chart
     def initialize(chart, options={})
+      options[:format_code] = "0.0%"
       @shape = :box
       @colors = []
       super(chart, options)
@@ -53,18 +54,23 @@ module Axlsx
     # @return [String]
     def to_xml_string(str = '')
       super(str) do
-
-        colors.each_with_index do |c, index|
-          str << '<c:dPt>'
-          str << ('<c:idx val="' << index.to_s << '"/>')
+        if colors.length == 1
           str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << c << '"/>')
-          str << '</a:solidFill></c:spPr></c:dPt>'
+          str << '<a:srgbClr val="' << colors[0] << '"/>'
+          str << '</a:solidFill></c:spPr>'
+        else
+          colors.each_with_index do |c, index|
+            str << '<c:dPt>'
+            str << ('<c:idx val="' << index.to_s << '"/>')
+            str << '<c:spPr><a:solidFill>'
+            str << ('<a:srgbClr val="' << c << '"/>')
+            str << '</a:solidFill></c:spPr></c:dPt>'
+          end
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
         @data.to_xml_string(str) unless @data.nil?
-        # this is actually only required for shapes other than box 
+        # this is actually only required for shapes other than box
         str << ('<c:shape val="' << shape.to_s << '"></c:shape>')
       end
     end
