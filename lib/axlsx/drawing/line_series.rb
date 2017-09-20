@@ -36,7 +36,7 @@ module Axlsx
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
-      options[:format_code] = "0.0%"
+      options[:format_code] = "0.00%"
       @show_marker = false
       @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false
@@ -83,14 +83,16 @@ module Axlsx
           str << ('<a:srgbClr val="' << color << '"/>')
           str << '</a:solidFill>'
           str << '</a:ln>'
-          str << '<a:round/>'
+          # str << '<a:round/>'
           str << '</c:spPr>'
         end
 
         if !@show_marker
           str << '<c:marker><c:symbol val="none"/></c:marker>'
         elsif @marker_symbol != :default
-          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/></c:marker>'
+          str << '<c:marker><c:symbol val="' + @marker_symbol.to_s + '"/><c:size val="5"/>'
+          str << '<c:spPr><a:solidFill><a:srgbClr val="' << color << '"/></a:solidFill></c:spPr>'
+          str << '</c:marker>'
         end
 
         @labels.to_xml_string(str) unless @labels.nil?

@@ -196,13 +196,13 @@ module Axlsx
       str << '<c:sideWall><c:thickness val="0"/></c:sideWall>'
       str << '<c:backWall><c:thickness val="0"/></c:backWall>'
       str << '<c:plotArea>'
-      str << '<c:layout/>'
+      # str << '<c:layout/>'
       yield if block_given?
       str << '</c:plotArea>'
       if @show_legend
         str << '<c:legend>'
         str << ('<c:legendPos val="' << @legend_position.to_s << '"/>')
-        str << '<c:layout/>'
+        # str << '<c:layout/>'
         str << '<c:overlay val="0"/>'
         str << '</c:legend>'
       end

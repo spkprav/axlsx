@@ -11,7 +11,7 @@ module Axlsx
     # @option options [Array] :data
     # @see StrData
     def initialize(options={})
-      @format_code = "General"
+      @format_code = options[:format_code] || "General"
       @pt = SimpleTypedList.new NumVal
       parse_options options
     end
