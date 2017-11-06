@@ -216,7 +216,7 @@ module Axlsx
         str << '<a:srgbClr val="' << bg_color << '"/>'
         str << '</a:solidFill>'
         str << '<a:ln>'
-        str << '<a:noFill/>'
+        str << '<a:solidFill><a:srgbClr val="000000"/></a:solidFill>'
         str << '</a:ln>'
         str << '</c:spPr>'
       end
