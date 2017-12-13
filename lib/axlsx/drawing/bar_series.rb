@@ -31,7 +31,7 @@ module Axlsx
     # @option options [String] colors an array of colors to use when rendering each data point
     # @param [Chart] chart
     def initialize(chart, options={})
-      options[:format_code] = "0.0%"
+      options[:format_code] = "0.0%" unless options[:format_code].present?
       @shape = :box
       @colors = []
       super(chart, options)

@@ -36,7 +36,7 @@ module Axlsx
     # @option options [Array, SimpleTypedList] labels
     # @param [Chart] chart
     def initialize(chart, options={})
-      options[:format_code] = "0.0%"
+      options[:format_code] = "0.0%" unless options[:format_code].present?
       @show_marker = false
       @marker_symbol = options[:marker_symbol] ? options[:marker_symbol] : :default
       @smooth = false
