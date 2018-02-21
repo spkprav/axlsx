@@ -13,7 +13,7 @@ module Axlsx
     # @option options [String] formatCode
     # @option options [Integer] v
     def initialize(options={})
-      @format_code = "0.0%" #options[:format_code] || 'General'
+      @format_code = "0.0%" unless options[:format_code].nil?
       super(options)
     end
 

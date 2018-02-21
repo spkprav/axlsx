@@ -26,7 +26,7 @@ module Axlsx
       @tag_name = values.first.is_a?(Cell) ? :numCache : :numLit
       values.each do |value|
         value = value.is_formula? ? 0 : value.value if value.is_a?(Cell)
-        @pt << NumVal.new(:v => value)
+        @pt << NumVal.new(:v => value, format_code: @format_code)
       end
     end
 
